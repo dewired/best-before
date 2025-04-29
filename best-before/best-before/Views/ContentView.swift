@@ -17,9 +17,9 @@ struct ContentView: View {
             List {
                 ForEach(items) { item in
                     NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
+                        ItemDetailView(item: item)
                     } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
+                        ItemRowView(item: item)
                     }
                 }
                 .onDelete(perform: deleteItems)
@@ -46,7 +46,11 @@ struct ContentView: View {
 
     private func addItem() {
         withAnimation {
-            let newItem = Item(timestamp: Date())
+            let newItem = Item(
+                name: "New Item",
+                expirationDate: Date().addingTimeInterval(7 * 24 * 60 * 60), // 7 days from now
+                notes: ""
+            )
             modelContext.insert(newItem)
         }
     }
@@ -57,6 +61,54 @@ struct ContentView: View {
                 modelContext.delete(items[index])
             }
         }
+    }
+}
+
+struct ItemRowView: View {
+    let item: Item
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text(item.name)
+                .font(.headline)
+            Text("Expires: \(item.expirationDate.formatted(date: .numeric, time: .omitted))")
+                .font(.subheadline)
+                .foregroundColor(.secondary)
+        }
+    }
+}
+
+struct ItemDetailView: View {
+    let item: Item
+    
+    var body: some View {
+        Form {
+            Section("Details") {
+                Text("Name: \(item.name)")
+                Text("Expiration Date: \(item.expirationDate.formatted())")
+                Text("Category: \(item.category)")
+                Text("Storage Location: \(item.storageLocation)")
+                if !(item.notes?.isEmpty ?? true) {
+                    Text("Notes: \(item.notes!)")
+                }
+            }
+            
+            Section("Status") {
+                Text("Status: \(item.isOpened ? "Opened" : "Unopened")")
+                if item.isOpened {
+                    if let openedDate = item.openedDate {
+                        Text("Opened on: \(openedDate.formatted())")
+                    }
+                }
+                if item.isPartiallyConsumed {
+                    Text("Remaining: \((item.remainingQuantity ?? 1.0) * 100, specifier: "%.0f")%")
+                }
+                if let lastConsumedDate = item.lastConsumedDate {
+                    Text("Last consumed: \(lastConsumedDate.formatted())")
+                }
+            }
+        }
+        .navigationTitle(item.name)
     }
 }
 

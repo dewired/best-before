@@ -8,27 +8,8 @@
 import SwiftUI
 import SwiftData
 
-class AppDelegate: NSObject, UIApplicationDelegate {
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        // Configure app environment
-        configureEnvironment()
-        return true
-    }
-    
-    private func configureEnvironment() {
-        // Set up any environment-specific configuration
-        #if DEBUG
-        print("Running in DEBUG mode")
-        #else
-        print("Running in RELEASE mode")
-        #endif
-    }
-}
-
 @main
 struct best_beforeApp: App {
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Item.self,
@@ -45,7 +26,6 @@ struct best_beforeApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environment(\.managedObjectContext, sharedModelContainer.mainContext)
         }
         .modelContainer(sharedModelContainer)
     }

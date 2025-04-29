@@ -16,10 +16,10 @@
   - [x] Set up app delegate
   - [x] Configure environment
   - [x] Add basic error handling
-- [ ] Verify project setup
-  - [ ] Check project builds
-  - [ ] Run initial tests
-  - [ ] Verify app launches
+- [x] Verify project setup
+  - [x] Check project builds
+  - [x] Run initial tests
+  - [x] Verify app launches
 
 ### Prompt 2: Core Data Models - Part 1
 - [ ] Create ItemTests.swift
