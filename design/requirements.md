@@ -8,49 +8,411 @@ Best Before is an iOS application designed to help users track and manage their 
 ### 1. Item Management
 - Add new food items with:
   - Product name
-  - Expiration date
-  - Category (e.g., Dairy, Meat, Produce, Pantry)
-  - Quantity
+  - Expiration date (with default periods by category):
+    - Dairy
+      - Milk: 7 days after opening
+      - Cheese: 2-4 weeks after opening
+      - Yogurt: 7-14 days after opening
+      - Butter: 1-3 months in fridge
+      - Cream: 7-10 days after opening
+      - Ice Cream: 2-4 months in freezer
+    - Meat & Seafood
+      - Beef: 3-5 days in fridge, 6-12 months in freezer
+      - Pork: 3-5 days in fridge, 6-8 months in freezer
+      - Poultry: 1-2 days in fridge, 9-12 months in freezer
+      - Fish: 1-2 days in fridge, 6-8 months in freezer
+      - Shellfish: 1-2 days in fridge, 3-6 months in freezer
+      - Processed Meats: 7 days after opening
+    - Produce
+      - Fruits: 3-7 days in fridge
+      - Vegetables: 5-7 days in fridge
+      - Herbs: 7-10 days in fridge
+      - Salad Greens: 5-7 days in fridge
+    - Pantry
+      - Canned Goods: 1-5 years (check can for date)
+      - Dry Goods: 6-12 months
+      - Pasta: 1-2 years
+      - Rice: 4-5 years
+      - Cereals: 6-12 months
+      - Baking Supplies: 6-12 months
+    - Frozen Foods
+      - Frozen Meals: 3-4 months
+      - Frozen Vegetables: 8-12 months
+      - Frozen Fruits: 8-12 months
+      - Ice Cream: 2-4 months
+    - Beverages
+      - Water: 6 months (bottled)
+      - Juice: 7-10 days after opening
+      - Soda: 3-6 months after opening
+      - Coffee: 6-12 months
+      - Tea: 1-2 years
+    - Snacks
+      - Chips: 2-3 months after opening
+      - Cookies: 2-3 weeks after opening
+      - Crackers: 3-4 months after opening
+      - Nuts: 6-12 months
+    - Condiments
+      - Sauces: 6-12 months after opening
+      - Dressings: 3-6 months after opening
+      - Spices: 2-3 years
+      - Oils: 6-12 months after opening
+    - Bakery
+      - Bread: 5-7 days
+      - Pastries: 2-3 days
+      - Cakes: 3-4 days
+      - Cookies: 2-3 weeks
+    - Deli
+      - Prepared Foods: 3-4 days
+      - Sandwiches: 1-2 days
+      - Salads: 3-5 days
+  - Category and Subcategory (with default units):
+    - Dairy
+      - Milk (gallons, quarts, pints)
+      - Cheese (pounds, ounces)
+      - Yogurt (cups, ounces)
+      - Butter (pounds, sticks)
+      - Cream (pints, cups)
+      - Ice Cream (pints, quarts)
+    - Meat & Seafood
+      - Beef (pounds, ounces)
+      - Pork (pounds, ounces)
+      - Poultry (pounds, ounces)
+      - Fish (pounds, ounces)
+      - Shellfish (pounds, ounces)
+      - Processed Meats (pounds, ounces)
+    - Produce
+      - Fruits (pounds, pieces)
+      - Vegetables (pounds, pieces)
+      - Herbs (bunches, ounces)
+      - Salad Greens (bags, heads)
+    - Pantry
+      - Canned Goods (cans, ounces)
+      - Dry Goods (pounds, ounces)
+      - Pasta (pounds, boxes)
+      - Rice (pounds, bags)
+      - Cereals (boxes, ounces)
+      - Baking Supplies (pounds, ounces)
+    - Frozen Foods
+      - Frozen Meals (boxes, packages)
+      - Frozen Vegetables (bags, pounds)
+      - Frozen Fruits (bags, pounds)
+      - Ice Cream (pints, quarts)
+    - Beverages
+      - Water (gallons, bottles)
+      - Juice (gallons, bottles)
+      - Soda (cans, bottles)
+      - Coffee (pounds, bags)
+      - Tea (boxes, bags)
+    - Snacks
+      - Chips (bags, ounces)
+      - Cookies (packages, ounces)
+      - Crackers (boxes, ounces)
+      - Nuts (pounds, ounces)
+    - Condiments
+      - Sauces (bottles, ounces)
+      - Dressings (bottles, ounces)
+      - Spices (jars, ounces)
+      - Oils (bottles, ounces)
+    - Bakery
+      - Bread (loaves, packages)
+      - Pastries (pieces, packages)
+      - Cakes (whole, slices)
+      - Cookies (packages, pieces)
+    - Deli
+      - Prepared Foods (pounds, containers)
+      - Sandwiches (pieces)
+      - Salads (containers, pounds)
+  - Quantity (with appropriate unit)
   - Purchase date
   - Notes (optional)
   - Barcode scanning (future enhancement)
+  - Storage location:
+    - Primary location (required):
+      - Refrigerator
+      - Freezer
+      - Pantry
+      - Counter
+      - Cabinet
+    - Secondary location (optional):
+      - Same options as primary location
+      - Used for items that might be moved between locations
+      - Example: Items moved from pantry to refrigerator after opening
+- Item Status Management:
+  - Track item state:
+    - Unopened (original expiration date)
+    - Opened (adjusted expiration date)
+    - Partially Consumed
+    - Consumed
+    - Expired
+  - State Transitions:
+    - Opening/Unopening:
+      - Can mark item as unopened after being opened
+      - Reverts to original expiration date when unopened
+      - No history tracking required
+      - Confirmation dialog for state changes
+    - Consumption:
+      - Can mark as partially consumed
+      - Can mark as fully consumed
+      - Cannot revert from consumed state
+    - Expiration:
+      - Automatic expiration based on dates
+      - Manual override available
+      - Cannot revert from expired state
+  - Opening date tracking:
+    - Allow backdating of opening date
+    - Prevent future dating of opening
+    - Track opening date history
+    - Show original opening date
+  - Consumption tracking:
+    - Track partial consumption:
+      - Percentage remaining
+      - Quantity remaining
+      - Last consumption date
+      - Consumption history
+    - Visual indicators for partial consumption
+    - Automatic expiration adjustment based on consumption
+  - Automatic expiration date adjustment when opened:
+    - Category-specific rules for opened items:
+      - Dairy:
+        - Milk: 7 days after opening
+        - Cheese: 2-4 weeks after opening
+        - Yogurt: 7-14 days after opening
+        - Butter: 1-3 months after opening
+        - Cream: 7-10 days after opening
+        - Ice Cream: 2-4 months after opening
+      - Meat & Seafood:
+        - Beef: 3-5 days after opening
+        - Pork: 3-5 days after opening
+        - Poultry: 1-2 days after opening
+        - Fish: 1-2 days after opening
+        - Shellfish: 1-2 days after opening
+        - Processed Meats: 7 days after opening
+      - Produce:
+        - Fruits: 3-7 days after cutting
+        - Vegetables: 5-7 days after cutting
+        - Herbs: 7-10 days after cutting
+        - Salad Greens: 5-7 days after opening
+      - Pantry:
+        - Canned Goods: 3-4 days after opening
+        - Dry Goods: 6-12 months after opening
+        - Pasta: 3-5 days after opening
+        - Rice: 6-12 months after opening
+        - Cereals: 2-3 months after opening
+        - Baking Supplies: 6-12 months after opening
+      - Frozen Foods:
+        - Frozen Meals: 3-4 days after thawing
+        - Frozen Vegetables: 3-5 days after thawing
+        - Frozen Fruits: 3-5 days after thawing
+        - Ice Cream: 2-4 months after opening
+      - Beverages:
+        - Water: 6 months after opening
+        - Juice: 7-10 days after opening
+        - Soda: 3-6 months after opening
+        - Coffee: 2-3 weeks after opening
+        - Tea: 1-2 years after opening
+      - Snacks:
+        - Chips: 2-3 months after opening
+        - Cookies: 2-3 weeks after opening
+        - Crackers: 3-4 months after opening
+        - Nuts: 6-12 months after opening
+      - Condiments:
+        - Sauces: 6-12 months after opening
+        - Dressings: 3-6 months after opening
+        - Spices: 2-3 years after opening
+        - Oils: 6-12 months after opening
+      - Bakery:
+        - Bread: 5-7 days after opening
+        - Pastries: 2-3 days after opening
+        - Cakes: 3-4 days after opening
+        - Cookies: 2-3 weeks after opening
+      - Deli:
+        - Prepared Foods: 3-4 days after opening
+        - Sandwiches: 1-2 days after opening
+        - Salads: 3-5 days after opening
+    - User customization options:
+      - Override default rules
+      - Set custom periods for categories
+      - Set custom periods for specific items
+      - Save custom rules for future use
+    - Visual indication of adjusted expiration
+    - History of expiration date changes
+  - Manual override option for adjusted dates
 - Edit existing items
 - Delete items
 - Mark items as consumed
 - Import items from Intent app shopping lists
 
+### Item Tracking Rules
+- Each item is tracked individually
+- No batch operations or bulk updates
+- Simple item-level management:
+  - One item = One expiration date
+  - One item = One quantity
+  - One item = One status (Active, Consumed, Expired)
+  - One item = One opening state (Opened/Unopened)
+  - One item = One consumption state (Full, Partial, Consumed)
+- When adding multiple items of the same product:
+  - Each item must be added separately
+  - Each item can have its own expiration date
+  - Each item can have its own quantity
+  - Each item can have its own opening state
+  - Each item can have its own consumption state
+
 ### 2. Organization & Display
 - List view of all items
+- Visual Indicators:
+  - Item Status Indicators:
+    - Unopened: Solid circle icon
+    - Opened: Circle with checkmark
+    - Partially Consumed: Circle with partial fill
+    - Consumed: Circle with X
+    - Expired: Circle with exclamation mark
+  - Expiration Status Colors:
+    - Good: Green
+    - Warning (3 days): Yellow
+    - Critical (1 day): Orange
+    - Expired: Red
+  - Days Remaining Display:
+    - Show days since opening
+    - Show days until expiration
+    - Color-coded countdown
+    - Visual progress bar
+  - Consumption Indicators:
+    - Percentage remaining bar
+    - Quantity remaining
+    - Last consumption date
+  - Category Icons:
+    - Unique icon for each category
+    - Subcategory variations
+    - Color-coded by category
+  - Storage Location Indicators:
+    - Location-specific icons
+    - Color-coded by location
+    - Visual hierarchy for primary/secondary
 - Group items by:
-  - Expiration date (Soon to expire, Expired, Good for a while)
+  - Expiration date:
+    - Expired
+    - Expiring today
+    - Expiring this week
+    - Expiring this month
+    - Good for a while
   - Category
-  - Storage location (Fridge, Freezer, Pantry)
+  - Storage location:
+    - Primary location view
+    - Secondary location view
+    - Combined view (shows items in both locations)
+  - Consumption state:
+    - Full
+    - Partially consumed
+    - Consumed
 - Sort items by:
   - Expiration date
   - Name
   - Category
   - Date added
+  - Storage location
+  - Consumption state
 
-### 3. Notifications
-- Push notifications for items approaching expiration
+### 3. Search & Filter
+- Global search:
+  - Search by product name
+  - Search by category
+  - Search by notes
+  - Real-time search results
+- Simple filters:
+  - By expiration date:
+    - Expired
+    - Expiring today
+    - Expiring this week
+    - Expiring this month
+    - Good for a while
+  - By category:
+    - All categories
+    - Individual categories
+    - Individual subcategories
+  - By storage location:
+    - All locations
+    - Individual locations
+- Filter combinations:
+  - Category + Expiration date
+  - Storage location + Expiration date
+  - Category + Storage location
+- Clear filters option
+- Reset to default view
+
+### 4. Notifications
+- Expiration notifications for all items:
+  - Default warning periods:
+    - 1 day before expiration
+    - 3 days before expiration
+    - 1 week before expiration
+  - Applies to all items regardless of opened/unopened state
+  - Customizable warning periods by category
+  - Different notification types:
+    - Warning (approaching expiration)
+    - Critical (expiring today)
+    - Expired (past expiration date)
+  - Location-based notifications:
+    - Notify when items are in primary location
+    - Optional notifications for secondary location
+- Additional opened-item notifications:
+  - Notification of expiration date changes when opened
+  - Warning when opened items are approaching expiration
+  - Reminder when item has been opened for:
+    - 50% of its opened shelf life
+    - 75% of its opened shelf life
+    - 90% of its opened shelf life
+- Consumption-based notifications:
+  - Reminder for partially consumed items
+  - Warning for items with low remaining quantity
+  - Suggestion to consume based on expiration
 - Customizable notification settings:
   - Days before expiration
   - Notification frequency
   - Quiet hours
-
-### 4. Search & Filter
-- Search items by name
-- Filter by:
-  - Category
-  - Expiration status
-  - Storage location
-  - Date range
+  - Category-specific settings
+  - Location-specific settings
+  - Opening-based settings
+  - Enable/disable specific notification types:
+    - Expiration warnings
+    - Opened item reminders
+    - Consumption alerts
 
 ### 5. Statistics & Insights
-- Food waste tracking
-- Consumption patterns
-- Expiration trends
-- Shopping recommendations
+- Waste Reduction Metrics:
+  - Food waste by weight
+  - Food waste by category
+  - Waste reduction over time
+  - Items saved from expiration
+- Environmental Impact:
+  - Carbon emissions saved
+  - Water usage saved
+  - Landfill space saved
+  - Environmental impact by category
+- Financial Impact:
+  - Money saved by reducing waste
+  - Cost per category
+  - Monthly/yearly savings
+  - ROI on food purchases
+- Visual Analytics:
+  - Interactive charts and graphs:
+    - Waste reduction trends
+    - Category distribution
+    - Environmental impact visualization
+    - Financial savings over time
+  - Color-coded indicators:
+    - Red for high waste areas
+    - Yellow for moderate waste
+    - Green for low waste
+  - Progress indicators:
+    - Monthly goals
+    - Yearly targets
+    - Personal bests
+- Insights and Recommendations:
+  - Category-specific tips
+  - Storage optimization suggestions
+  - Purchase pattern analysis
+  - Waste reduction strategies
 
 ## Technical Requirements
 
@@ -70,6 +432,15 @@ Best Before is an iOS application designed to help users track and manage their 
   - Notes
   - Status (Active, Consumed, Expired)
   - Source (Manual, Imported from Intent)
+  - Opening state (Opened/Unopened)
+  - Opening date
+  - Original expiration date
+  - Adjusted expiration date
+  - Consumption state (Full, Partial, Consumed)
+  - Remaining quantity
+  - Remaining percentage
+  - Last consumption date
+  - Consumption history
 
 ### Import Features
 - Import shopping lists from Intent app
@@ -83,14 +454,120 @@ Best Before is an iOS application designed to help users track and manage their 
 ### User Interface
 - Clean, intuitive design
 - Dark mode support
-- Accessibility features
+- Accessibility features:
+  - VoiceOver support
+  - Dynamic Type
+  - High contrast mode
+  - Reduced motion
 - Responsive layout for different iOS devices
+- Visual Design System:
+  - Color Palette:
+    - Primary colors for categories
+    - Status colors for expiration
+    - Accent colors for actions
+    - Background colors for modes
+  - Typography:
+    - Clear hierarchy
+    - Readable fonts
+    - Consistent sizing
+  - Icons:
+    - SF Symbols integration
+    - Custom category icons
+    - Status indicators
+  - Spacing:
+    - Consistent padding
+    - Clear grouping
+    - Visual hierarchy
+  - Animations:
+    - Smooth transitions
+    - Status changes
+    - List updates
+  - Feedback:
+    - Haptic feedback
+    - Visual feedback
+    - Audio feedback (optional)
+
+### Data Management
+- Local storage only:
+  - All data stored on device
+  - No cloud sync required
+  - No backup functionality
+  - No data export/import
+- Data persistence:
+  - SwiftData for efficient local storage
+  - Automatic data saving
+  - No manual save required
+- Data cleanup:
+  - Automatic cleanup of expired items
+  - Optional manual cleanup
+  - Storage optimization
+
+### Privacy & Security
+- Data privacy:
+  - All data stored locally
+  - No data collection
+  - No analytics tracking
+  - No user identification
+- Security measures:
+  - iOS system security
+  - No sensitive data storage
+  - No password requirements
+  - No authentication needed
+- Permissions:
+  - No special permissions required
+  - No camera access (for future barcode feature)
+  - No location access
+  - No network access
+
+### Error Handling & Reliability
+- Data Integrity:
+  - Automatic data validation on input
+  - Data consistency checks
+  - Automatic recovery from data corruption
+  - Transaction-based data operations
+  - Atomic operations for critical updates
+- Crash Prevention:
+  - Comprehensive input validation
+  - Null safety checks
+  - Memory management optimization
+  - Resource cleanup on app termination
+  - State management best practices
+- Error Recovery:
+  - Automatic state recovery
+  - Graceful degradation of features
+  - User-friendly error messages
+  - Automatic retry mechanisms
+  - Fallback options for failed operations
+- Edge Cases:
+  - Handle all possible date scenarios
+  - Manage timezone changes
+  - Handle device storage limitations
+  - Manage concurrent operations
+  - Handle rapid user interactions
+- Testing Requirements:
+  - Unit test coverage > 90%
+  - UI test coverage for critical paths
+  - Performance testing under load
+  - Memory leak testing
+  - Crash reporting and analysis
+- Monitoring & Logging:
+  - Structured logging system
+  - Performance metrics tracking
+  - Error tracking and reporting
+  - User action logging
+  - System state monitoring
 
 ### Performance
-- Fast app launch time
-- Smooth scrolling and transitions
+- Fast app launch time (< 2 seconds)
+- Smooth scrolling (60 FPS)
 - Efficient data loading and caching
-- Minimal battery impact
+- Minimal battery impact (< 1% per hour)
+- Offline functionality
+- No network dependencies
+- Memory usage optimization
+- CPU usage optimization
+- Storage optimization
+- Background task management
 
 ## Future Enhancements
 1. Barcode scanning for quick item addition
@@ -100,10 +577,34 @@ Best Before is an iOS application designed to help users track and manage their 
 5. Social sharing features
 6. Integration with smart home devices
 7. Additional shopping list app integrations
+8. Custom views and saved filters:
+   - User-defined view combinations
+   - Saved filter presets
+   - Custom grouping rules
+   - Personalized dashboard layouts
 
 ## Success Metrics
 1. User engagement (daily active users)
 2. Number of items tracked
 3. Reduction in food waste
 4. User retention rate
-5. App store ratings and reviews 
+5. App store ratings and reviews
+
+### Notification System
+- Local notifications only
+- No push notifications
+- Notification triggers:
+  - Time-based (expiration dates)
+  - State-based (opened/consumed)
+  - Quantity-based (partial consumption)
+- Notification content:
+  - Item name
+  - Category
+  - Days remaining
+  - Current state
+  - Recommended action
+- Notification management:
+  - Automatic cleanup of old notifications
+  - Notification grouping
+  - Notification priority levels
+  - Notification history 
